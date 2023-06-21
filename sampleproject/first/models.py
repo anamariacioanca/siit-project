@@ -25,3 +25,10 @@ class Course(models.Model):
     
     def __str__(self):
         return f"{self.name} {self.teacher}"
+    
+class Student(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=10)    
+    courses = models.ManyToManyField(Course)
