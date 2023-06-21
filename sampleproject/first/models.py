@@ -21,7 +21,7 @@ class Course(models.Model):
     logo = models.FileField(null=True, blank=True)
     status = models.BooleanField(default=True)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
-    coordinator = models.OneToOneField(Teacher, on_delete=models.CASCADE, related_name="coordinator")
+    coordinator = models.OneToOneField(Teacher, null=True, blank=True, on_delete=models.CASCADE, related_name="coordinator") 
     
     def __str__(self):
         return f"{self.name} {self.teacher}"
