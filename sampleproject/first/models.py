@@ -4,5 +4,5 @@ from django.db import models
 class Course(models.Model):
     time = models.IntegerField(default=80)
     price =  models.FloatField()
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     name = models.CharField(max_length=30)
