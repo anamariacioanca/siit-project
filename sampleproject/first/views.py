@@ -18,6 +18,6 @@ def courses(request):
 def course(request, course_id):
     try:
         my_course = Course.objects.get(id=course_id)
-        return HttpResponse(f"{my_course.name} <br> {my_course.price} <br> {my_course.description}")
+        return HttpResponse(f"{my_course.name} <br> {my_course.price} <br> {my_course.description} <br> {my_course.created} <br> {my_course.update}")
     except Course.DoesNotExist:
         return HttpResponse("Nu exista", status=404)

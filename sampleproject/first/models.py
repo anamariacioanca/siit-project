@@ -6,3 +6,6 @@ class Course(models.Model):
     price =  models.FloatField()
     description = models.TextField(null=True, blank=True)
     name = models.CharField(max_length=30)
+    created = models.DateTimeField(auto_now=True)
+    update = models.DateTimeField(auto_now=True) 
+
