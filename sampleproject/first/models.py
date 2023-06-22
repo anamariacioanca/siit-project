@@ -36,6 +36,7 @@ class Course(models.Model):
 class Student(models.Model):
     class Meta:
         ordering = ["first_name", "last_name"]
+        unique_together = ("first_name", "last_name")
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField()
