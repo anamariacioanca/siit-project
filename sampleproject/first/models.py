@@ -11,6 +11,10 @@ class Teacher(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name} <{self.email}>"   
     
+class CourseManager(models.Model):
+    def final_year(self):
+        return self.filter(year=5)    
+    
 class Course(models.Model):
     time = models.IntegerField(default=80)
     price =  models.FloatField(db_index=True)
@@ -24,10 +28,14 @@ class Course(models.Model):
     coordinator = models.OneToOneField(Teacher, null=True, blank=True, on_delete=models.CASCADE, related_name="coordinator") 
     year = models.IntegerField(default=1)
 
+    objects = CourseManager()
+
     def __str__(self):
         return f"{self.name} {self.teacher}"
     
 class Student(models.Model):
+    class Meta:
+        ordering = ["first_name", "last_name"]
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField()
