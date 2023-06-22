@@ -22,7 +22,8 @@ class Course(models.Model):
     status = models.BooleanField(default=True)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     coordinator = models.OneToOneField(Teacher, null=True, blank=True, on_delete=models.CASCADE, related_name="coordinator") 
-    
+    year = models.IntegerField(default=1)
+
     def __str__(self):
         return f"{self.name} {self.teacher}"
     
