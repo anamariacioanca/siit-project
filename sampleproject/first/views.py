@@ -18,6 +18,8 @@ def courses(request):
 def course(request, course_id):
     try:
         my_course = Course.objects.get(id=course_id)
-        return render(request, "course.html", {"my_course": my_course})
+        students = ["George"]
+        students = my_course.student_set.all()
+        return render(request, "course.html", {"my_course": my_course, "students": students})
     except Course.DoesNotExist:
         return HttpResponse("Nu exista", status=404)
