@@ -11,8 +11,13 @@ def hello_name(request, name):
     return HttpResponse(f"Hello {name}!")
 
 def courses(request):
-    all_courses = Course.objects.all() # select * from courses;
-    courses_name = [f"<a href='/course/{Course.id}'>{Course.name}</a>" for Course in all_courses]
+    year = request.GET.get("an")
+    if year is None:
+        all_courses = Course.objects.all().order_by("-year") # select * from courses;
+    else:    
+        all_courses = Course.objects.filter(year__lte=int(year))
+    courses_name = [f"<a href='/course/{Course.id}'>{Course.name} year: {Course.year}</a>" for Course in all_courses]
+    print(request.GET)
     return HttpResponse(f"{courses_name}")
 
 def course(request, course_id):
