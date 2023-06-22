@@ -11,11 +11,10 @@ def hello_name(request, name):
     return HttpResponse(f"Hello {name}!")
 
 def courses(request):
-    year = request.GET.get("an")
-    if year is None:
-        all_courses = Course.objects.all().order_by("-year") # select * from courses;
-    else:    
-        all_courses = Course.objects.filter(year__lte=int(year))
+    year = request.GET.get("year")
+    all_courses = Course.objects.all().order_by("-year")
+    if year is not None:   
+        all_courses = all_courses.filter(year__lte=int(year), name_contains="Course")
     courses_name = [f"<a href='/course/{Course.id}'>{Course.name} year: {Course.year}</a>" for Course in all_courses]
     print(request.GET)
     return HttpResponse(f"{courses_name}")
