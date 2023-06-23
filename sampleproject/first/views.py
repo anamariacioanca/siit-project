@@ -16,7 +16,7 @@ def courses(request):
     all_courses = Course.objects.all().order_by("-year")
     if year is not None:   
         all_courses = all_courses.filter(Q(year__lte=int(year)) | Q(name__icontains="Course"))
-    all_courses = all_courses.select_related("teacher")
+    all_courses = all_courses.only("name", "teacher")
     return render(request, "courses.html", {"courses": all_courses})
 
 def course(request, course_id):
