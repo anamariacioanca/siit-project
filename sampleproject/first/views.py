@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Course, Student
-from django.db.models import Q
+from django.db.models import Q, F
 
 
 # Create your views here.
@@ -31,7 +31,8 @@ def course(request, course_id):
     
 def students(request):
     students = Student.objects.all()
-    for student in students:
-        student.year = student.year + 1
-        student.save()
-    return HttpResponse("OK")    
+    # for student in students:
+    #     student.year = student.year + 1
+    #     student.save()
+    students.update(year=F('year') + 1)
+    return render(request, "course.html", {})   
