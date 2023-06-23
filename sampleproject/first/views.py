@@ -16,9 +16,8 @@ def courses(request):
     all_courses = Course.objects.all().order_by("-year")
     if year is not None:   
         all_courses = all_courses.filter(Q(year__lte=int(year)) | Q(name__icontains="Course"))
-    courses_name = [f"<a href='/course/{Course.id}'>{Course.name} year: {Course.year}</a>" for Course in all_courses]
-    print(request.GET)
-    return HttpResponse(f"{courses_name}")
+    
+    return render(request, "courses.html", {"courses": all_courses})
 
 def course(request, course_id):
     try:
