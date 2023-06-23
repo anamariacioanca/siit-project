@@ -33,5 +33,5 @@ def students(request):
     # for student in students:
     #     student.year = student.year + 1
     #     student.save()
-    students.update(year=F('year') + 1)
-    return render(request, "course.html", {})   
+    #students.update(year=F('year') + 1)
+    return render(request, "students.html", {"students": students})   
