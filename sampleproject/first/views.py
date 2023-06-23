@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Course
+from .models import Course, Student
 from django.db.models import Q
 
 
@@ -28,3 +28,10 @@ def course(request, course_id):
         return render(request, "course.html", {"my_course": my_course, "students": students})
     except Course.DoesNotExist:
         return HttpResponse("Nu exista", status=404)
+    
+def students(request):
+    students = Student.objects.all()
+    for student in students:
+        student.year = student.year + 1
+        student.save()
+    return HttpResponse("OK")    
