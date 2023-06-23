@@ -4,21 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style type="text/css">
+        td {
+            border: 2px solid black;
+        }
+        .row1 {
+            background-color: grey;
+        }
+        .row2 {
+            background-color: white;
+        }
+    </style>
 </head>
 <body>
     <h1>Students</h1>
     {% for student in students %}
         <h2>{{ student }}</h2>
         <h3>Courses</h3>
-        <ul>
+        <table>
             {% for course in student.courses.all %}
-                <li>{{ course.name }}</li>
+                <tr class="{% cycle 'row1' 'row2' %}">
+                    <td>
+                        {{ course.name }}
+                    </td>
+                </tr>
             {% endfor %}  
-        </ul> 
+        </table> 
     {% endfor %}  
     
     {% if user.is_authenticated %}
-        Hello authenticated user {{user.username}}
+        Hello authenticated user {{ user.username | capfirst }}
     {% else %}    
         You are unauthenticated
     {% endif %}    
