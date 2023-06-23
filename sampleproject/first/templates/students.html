@@ -12,7 +12,7 @@
         <h3>Courses</h3>
         <ul>
             {% for course in student.courses.all %}
-                <li>{{ course }}</li>
+                <li>{{ course.name }}</li>
             {% endfor %}
         </ul> 
     {% endfor %}     
