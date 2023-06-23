@@ -20,6 +20,7 @@ from django.contrib import admin
 from django.urls import path, include
 from first.views import hello, hello_name, courses, course, students
 urlpatterns = [
+    path('grappelli/', include('grappelli.urls')), # grappelli URLS
     path('admin/', admin.site.urls),
     path("hello", hello),
     path("hello/<str:name>/", hello_name),
