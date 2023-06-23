@@ -13,8 +13,14 @@
         <ul>
             {% for course in student.courses.all %}
                 <li>{{ course.name }}</li>
-            {% endfor %}
+            {% endfor %}  
         </ul> 
-    {% endfor %}     
+    {% endfor %}  
+    
+    {% if user.is_authenticated %}
+        Hello authenticated user {{user.username}}
+    {% else %}    
+        You are unauthenticated
+    {% endif %}    
 </body>
 </html>
