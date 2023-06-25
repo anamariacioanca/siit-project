@@ -1,10 +1,11 @@
 {% extends "base.html" %}
+{% load humanize %}
 {% block "content" %}
     <h1>{{my_course.name}}</h1> 
-    Price: {{my_course.price}}<br> 
+    Price: {{my_course.price| intcomma}}<br> 
     Description: {{my_course.description}}<br> 
-    {{my_course.created}}<br> 
-    {{my_course.update}}<br>
+    Created: {{my_course.created| naturaltime}}<br> 
+    Updated: {{my_course.update| naturaltime}}<br>
     {{my_course.teacher}}
     <h2>Students</h2>
     <ol>
