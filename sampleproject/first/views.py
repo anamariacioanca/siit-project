@@ -37,7 +37,7 @@ def students(request):
     return render(request, "students.html", {"students": students})   
 
 def main(request):
-    return render(request, "main.html", {})
+    return render(request, "base.html", {})
 
 def profile(request):
     return render(request, "profile.html", {})
