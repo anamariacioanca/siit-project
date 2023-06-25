@@ -18,7 +18,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from first.views import hello, hello_name, courses, course, students, main
+from first.views import hello, hello_name, courses, course, students, main, profile
 urlpatterns = [
     path('grappelli/', include('grappelli.urls')), # grappelli URLS
     path('admin/', admin.site.urls),
@@ -28,6 +28,7 @@ urlpatterns = [
     path("course/<int:course_id>", course),
     path("students", students),
     path("__debug__/", include("debug_toolbar.urls")),
+    path("profile", profile),
     path("", main),
     
 ]

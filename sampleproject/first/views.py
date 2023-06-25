@@ -38,3 +38,6 @@ def students(request):
 
 def main(request):
     return render(request, "main.html", {})
+
+def profile(request):
+    return render(request, "profile.html", {})
