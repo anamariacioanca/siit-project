@@ -66,6 +66,13 @@ code {
               <a class="nav-link" href="/students">Students</a>
             </li>
           </ul>
+          <div class="pull-right" style="color: white">
+            {% if user.is_authenticated %}
+                Hello {{ user.username | capfirst }}!
+            {% else %}    
+                You are unauthenticated!
+            {% endif %}    
+          </div>
         </div>
       </nav>
     </header>
@@ -74,7 +81,7 @@ code {
     <main role="main" class="container">
         {% block "content" %}
          <h1 class="mt-5">Welcome to SIIT </h1>
-         Select an option to begin
+         Select an option to begin.
         {% endblock %}
     </main>
 
