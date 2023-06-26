@@ -1,5 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from .models import Teacher
 
 class ContactForm(forms.Form):
     name = forms.CharField(required=True)
@@ -18,5 +19,10 @@ class ContactForm(forms.Form):
         if name not in email:
             raise ValidationError("Name must appear in email")
         return self.cleaned_data
+    
+class TeacherForm(forms.ModelForm):
+    class Meta:
+        model = Teacher
+        fields = "__all__"    
                                  
                         

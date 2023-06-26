@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Course, Student
 from django.db.models import Q, F
-from .forms import ContactForm
+from .forms import ContactForm, TeacherForm
 
 
 # Create your views here.
@@ -58,3 +58,15 @@ def contact(request):
         "message": message
     }
     return render(request, "contact.html", context)
+
+def add_teacher(request):
+    if request.method == "POST":
+        form = TeacherForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:    
+        form = TeacherForm()
+    context = {
+        "form": form
+    }
+    return render(request, "add_teacher.html", context)
