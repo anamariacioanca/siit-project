@@ -44,7 +44,17 @@ def profile(request):
     return render(request, "profile.html", {})
 
 def contact(request):
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            message = "Validated form"
+        else:
+            message = "Invalid form"    
+    else:
+        form = ContactForm()
+        message = ""        
     context = {
-        "form": ContactForm()
+        "form": form,
+        "message": message
     }
     return render(request, "contact.html", context)
