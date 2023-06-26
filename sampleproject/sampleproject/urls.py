@@ -31,7 +31,7 @@ urlpatterns = [
     path("students", students, name="students"),
     path("__debug__/", include("debug_toolbar.urls")),
     path("profile", profile),
-    path("contact/", contact, name="contact"),
+    path("contact/", contact),
     path("", main),
 
 ]
