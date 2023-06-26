@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Teacher
+from .models import Teacher, Student
 
 class ContactForm(forms.Form):
     name = forms.CharField(required=True)
@@ -26,6 +26,14 @@ class TeacherForm(forms.ModelForm):
         fields = "__all__"    
 
     #phone_number = forms.CharField(widget=forms.PasswordInput)
-    #active = forms.BooleanField()    
+    #active = forms.BooleanField()   
+    
+
+class StudentForm(forms.ModelForm):
+    class Meta:
+        model = Student
+        exclude = []
+
+
                                  
                         

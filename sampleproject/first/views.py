@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Course, Student, Teacher
 from django.db.models import Q, F
 from django.shortcuts import get_object_or_404
-from .forms import ContactForm, TeacherForm
+from .forms import ContactForm, TeacherForm, StudentForm
 
 
 # Create your views here.
@@ -84,3 +84,16 @@ def edit_teacher(request, teacher_id):
         "form": form
     }
     return render(request, "edit_teacher.html", context)
+
+def add_student(request):
+    if request.method == "POST":
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            student = form.save()
+            return redirect(f"/students?student_id={student.id}")    
+    else:    
+        form = StudentForm()
+    context = {
+        "form": form
+    }
+    return render(request, "add_student.html", context)
