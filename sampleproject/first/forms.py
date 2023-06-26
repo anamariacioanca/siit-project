@@ -11,3 +11,12 @@ class ContactForm(forms.Form):
         if name != name.title():
             raise ValidationError("The ame must begin with a capital letter")
         return name
+    
+    def clean(self):
+        name = self.cleaned_data["name"]
+        email = self.cleaned_data["email"]
+        if name not in email:
+            raise ValidationError("Name must appear in email")
+        return self.cleaned_data
+                                 
+                        
