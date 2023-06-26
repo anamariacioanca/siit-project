@@ -24,5 +24,8 @@ class TeacherForm(forms.ModelForm):
     class Meta:
         model = Teacher
         fields = "__all__"    
+
+    #phone_number = forms.CharField(widget=forms.PasswordInput)
+    #active = forms.BooleanField()    
                                  
                         

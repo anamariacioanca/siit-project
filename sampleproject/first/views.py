@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Course, Student
+from .models import Course, Student, Teacher
 from django.db.models import Q, F
+from django.shortcuts import get_object_or_404
 from .forms import ContactForm, TeacherForm
 
 
@@ -70,3 +71,16 @@ def add_teacher(request):
         "form": form
     }
     return render(request, "add_teacher.html", context)
+
+def edit_teacher(request, teacher_id):
+    teacher = get_object_or_404(Teacher, id=teacher_id)
+    if request.method == "POST":
+        form = TeacherForm(data=request.POST, instance=teacher)
+        if form.is_valid():
+            form.save()
+    else:    
+        form = TeacherForm(instance=teacher)
+    context = {
+        "form": form
+    }
+    return render(request, "edit_teacher.html", context)
