@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Course, Student
 from django.db.models import Q, F
+from .forms import ContactForm
 
 
 # Create your views here.
@@ -43,4 +44,7 @@ def profile(request):
     return render(request, "profile.html", {})
 
 def contact(request):
-    return render(request, "contact.html", {})
+    context = {
+        "form": ContactForm()
+    }
+    return render(request, "contact.html", context)

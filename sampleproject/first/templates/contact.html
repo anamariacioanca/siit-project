@@ -1,14 +1,15 @@
 {% extends "base.html" %}
 {% block "content" %}
 <h1 class="mt-5">Contact</h1>
+{% comment %}
 <form method="POST">
     {% csrf_token %}
     Select: <select name="example">
                 <option value="student" selected>Student</option>
                 <option value="teacher">Teacher</option>
             </select><br>
-    Name: <input type="text" name="your_name"/><br>
-    Email: <input type="email" name="email"/><br>
+    Name: <input type="text" name="your_name" required/><br>
+    Email: <input type="email" name="email" placeholder="enter your email here"/><br>
     Password: <input type="password" name="pass"/><br>
     Message: <textarea row="50" cols="25" name="message"></textarea>
     <input type="submit" value="Send"/>
@@ -19,4 +20,8 @@
 
 <h2>GET Data</h2>
 {{ request.GET }}
+{% endcomment %}
+
+{{ form.as_p }}
+
 {% endblock "content" %}
