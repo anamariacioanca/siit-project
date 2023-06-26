@@ -1,4 +1,16 @@
 {% extends "base.html" %}
 {% block "content" %}
 <h1 class="mt-5">Contact</h1>
-{% endblock %}
+<form method="POST" action="{% url 'contact' %}">
+    {% csrf_token %}
+    Name: <input type="text" name="your_name"/><br>
+    Email: <input type="email" name="email"/><br>
+    Message: <textarea row="50" cols="25" name="message"></textarea>
+    <input type="submit" value="Send"/>
+</form>
+<h2>POST Data</h2>
+{{ request.POST }}
+
+<h2>GET Data</h2>
+{{ request.GET }}
+{% endblock "content" %}
