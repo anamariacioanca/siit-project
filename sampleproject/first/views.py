@@ -86,7 +86,7 @@ def edit_teacher(request, teacher_id):
     return render(request, "edit_teacher.html", context)
 
 def add_student(request):
-    teacher = request.GET.get("teacher", "")
+    teacher = request.GET.get("teacher")
     if request.method == "POST":
         form = StudentForm(request.POST, filter_teacher=teacher)
         if form.is_valid():
