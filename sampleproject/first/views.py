@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from .models import Course, Student, Teacher
 from django.db.models import Q, F
 from django.shortcuts import get_object_or_404
@@ -116,3 +116,7 @@ def login_view(request):
         "form": LoginForm()
     }
     return render(request, "login.html", context)
+
+def logout_view(request):
+    logout(request)
+    return redirect("/")
