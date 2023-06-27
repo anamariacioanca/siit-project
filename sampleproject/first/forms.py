@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Teacher, Student
+from .models import Teacher, Student, Course
 
 class ContactForm(forms.Form):
     name = forms.CharField(required=True)
@@ -33,6 +33,10 @@ class StudentForm(forms.ModelForm):
     class Meta:
         model = Student
         exclude = []
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)    
+        self.fields["courses"].queryset = Course.objects.filter(teacher__last_name="Popescu")
 
 
                                  
