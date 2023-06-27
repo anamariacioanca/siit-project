@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth import authenticate, login
 from .models import Course, Student, Teacher
 from django.db.models import Q, F
 from django.shortcuts import get_object_or_404
-from .forms import ContactForm, TeacherForm, StudentForm
+from .forms import ContactForm, LoginForm, TeacherForm, StudentForm
 
 
 # Create your views here.
@@ -98,3 +99,20 @@ def add_student(request):
         "form": form
     }
     return render(request, "add_student.html", context)
+
+def login_view(request):
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user:
+                login(request, user)
+                return redirect("/")
+    else:
+        form = LoginForm()    
+    context = {
+        "form": LoginForm()
+    }
+    return render(request, "login.html", context)
