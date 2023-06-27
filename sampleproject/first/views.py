@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from .models import Course, Student, Teacher
 from django.db.models import Q, F
 from django.shortcuts import get_object_or_404
@@ -14,6 +15,7 @@ def hello(request):
 def hello_name(request, name):
     return HttpResponse(f"Hello {name}!")
 
+@login_required
 def courses(request):
     year = request.GET.get("year")
     all_courses = Course.objects.all().order_by("-year")
@@ -22,6 +24,7 @@ def courses(request):
     all_courses = all_courses.only("name", "teacher")
     return render(request, "courses.html", {"courses": all_courses})
 
+@login_required
 def course(request, course_id):
     try:
         my_course = Course.objects.get(id=course_id)
@@ -31,6 +34,7 @@ def course(request, course_id):
     except Course.DoesNotExist:
         return HttpResponse("Nu exista", status=404)
     
+@login_required   
 def students(request):
     students = Student.objects.all().prefetch_related("courses")
     # for student in students:
@@ -85,7 +89,7 @@ def edit_teacher(request, teacher_id):
         "form": form
     }
     return render(request, "edit_teacher.html", context)
-
+@login_required
 def add_student(request):
     teacher = request.GET.get("teacher")
     if request.method == "POST":
