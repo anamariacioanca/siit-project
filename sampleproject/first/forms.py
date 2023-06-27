@@ -35,8 +35,10 @@ class StudentForm(forms.ModelForm):
         exclude = []
 
     def __init__(self, *args, **kwargs):
+        teachers_name = kwargs.pop("filter_teacher")
         super().__init__(*args, **kwargs)    
-        self.fields["courses"].queryset = Course.objects.filter(teacher__last_name="Popescu")
+        teachers_name = kwargs.get("filter_teacher")
+        self.fields["courses"].queryset = Course.objects.filter(teacher__last_name=teachers_name)
 
 
                                  
