@@ -47,6 +47,16 @@ class LoginForm(forms.Form):
     username = forms.CharField(max_length=50)
     password = forms.CharField(max_length=100, widget=forms.PasswordInput)
 
+class StudentAdminForm(forms.ModelForm):
+    class Meta:
+        model = Student
+        fields = "__all__"    
+
+    def clean_email(self):
+        email = self.cleaned_data["email"]
+        if not email.endswith("@custom.com"):
+            raise ValidationError("Your email should end with '@custom.com'")    
+
 
 
                                  
