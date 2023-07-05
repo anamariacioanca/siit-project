@@ -19,7 +19,9 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.staticfiles import views
 from django.urls import re_path, path, include
-from first.views import hello, hello_name, courses, course, students, main, profile, contact, add_teacher, edit_teacher, add_student, login_view, logout_view, api_view
+from first.views import hello, hello_name, courses, course, students, main, profile, contact, add_teacher, edit_teacher, add_student
+from first.views import login_view, logout_view, api_view
+from first.router import router
 
 urlpatterns = [
     path('grappelli/', include('grappelli.urls')), # grappelli URLS
@@ -38,6 +40,7 @@ urlpatterns = [
     path("login", login_view),
     path("logout", logout_view),
     path("api/", api_view),
+    path("drf/", include(router.urls)),
     path("", main),
 
 ]
