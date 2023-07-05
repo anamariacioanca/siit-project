@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
@@ -124,3 +125,10 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect("/")
+
+def api_view(request):
+    response = [
+        {"name": "Ionel"},
+        {"name": "Viorel"}
+    ]
+    return HttpResponse(json.dumps(response), content_type="application/json")

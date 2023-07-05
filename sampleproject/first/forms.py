@@ -56,6 +56,7 @@ class StudentAdminForm(forms.ModelForm):
         email = self.cleaned_data["email"]
         if not email.endswith("@custom.com"):
             raise ValidationError("Your email should end with '@custom.com'")    
+        return email
 
 
 
