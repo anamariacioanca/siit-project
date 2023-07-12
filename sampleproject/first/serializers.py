@@ -1,7 +1,7 @@
-from rest_framework.serializers import HyperlinkedModelSerializer
+from rest_framework.serializers import ModelSerializer
 from . models import Course
 
-class CourseSerializer(HyperlinkedModelSerializer):
+class CourseSerializer(ModelSerializer):
     class Meta:
         model = Course
-        fields = ["name", "time", "price"]
+        fields = "__all__"

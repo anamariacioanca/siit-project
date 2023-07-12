@@ -33,7 +33,7 @@ def course(request, course_id):
         students = my_course.student_set.all()
         return render(request, "course.html", {"my_course": my_course, "students": students})
     except Course.DoesNotExist:
-        return HttpResponse("Nu exista", status=404)
+        return HttpResponse("NOT FOUND", status=404)
     
 @login_required   
 def students(request):
